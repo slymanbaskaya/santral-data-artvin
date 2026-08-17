@@ -19,7 +19,7 @@ load_dotenv()
 GCP_HOST = os.getenv("GCP_HOST")
 GCP_DB = os.getenv("GCP_DB")
 GCP_USER = os.getenv("GCP_USER")
-GCP_PASSWORD = os.getenv("GCP_PASSWORD") # Artık .env dosyasından okuyacak
+GCP_PASSWORD = os.getenv("GCP_PASSWORD")
 GCP_PORT = os.getenv("GCP_PORT")
 TABLE_NAME = "santral_data_artvin_ham"
 

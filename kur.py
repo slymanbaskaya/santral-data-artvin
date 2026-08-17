@@ -14,11 +14,11 @@ from psycopg2.extras import execute_values
 from datetime import datetime, date, time, timedelta
 
 # 1. Veritabanı Bağlantı Bilgileri (Aiven)
-GCP_HOST = os.getenv("GCP_HOST", "enerstra-enerstra.h.aivencloud.com")
-GCP_DB = os.getenv("GCP_DB", "enerstra3_db")
-GCP_USER = os.getenv("GCP_USER", "avnadmin")
+GCP_HOST = os.getenv("GCP_HOST")
+GCP_DB = os.getenv("GCP_DB")
+GCP_USER = os.getenv("GCP_USER")
 GCP_PASSWORD = os.getenv("GCP_PASSWORD")
-GCP_PORT = os.getenv("GCP_PORT", "16505")
+GCP_PORT = os.getenv("GCP_PORT")
 
 TABLE_NAME = "tcmb_usd_kur_h"
 TARGET_DATETIME_COL = "datetime"

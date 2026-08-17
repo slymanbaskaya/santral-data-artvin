@@ -7,11 +7,11 @@ from sqlalchemy import create_engine
 from urllib.parse import quote_plus
 
 # 1. Veritabanı Bağlantı Bilgileri (Aiven)
-GCP_HOST = os.getenv("GCP_HOST", "enerstra-enerstra.h.aivencloud.com")
-GCP_DB = os.getenv("GCP_DB", "enerstra3_db")
-GCP_USER = os.getenv("GCP_USER", "avnadmin")
+GCP_HOST = os.getenv("GCP_HOST")
+GCP_DB = os.getenv("GCP_DB")
+GCP_USER = os.getenv("GCP_USER")
 GCP_PASSWORD = os.getenv("GCP_PASSWORD")
-GCP_PORT = os.getenv("GCP_PORT", "16505")
+GCP_PORT = os.getenv("GCP_PORT")
 
 GCP_PASSWORD = quote_plus(GCP_PASSWORD)
 engine = create_engine(f"postgresql+psycopg2://{GCP_USER}:{GCP_PASSWORD}@{GCP_HOST}:{GCP_PORT}/{GCP_DB}")
