@@ -35,15 +35,15 @@ class DESAdapter(HTTPAdapter):
 # ==============================
 # 1) AYARLAR VE SABİTLER
 # ==============================
-EPIAS_EMAIL     = os.getenv("EPIAS_EMAIL")
-EPIAS_PASSWORD  = os.getenv("EPIAS_PASSWORD")
+SEFFAFLIK_USER = os.getenv("SEFFAFLIK_USER")
+SEFFAFLIK_PASS = os.getenv("SEFFAFLIK_PASS")
 
 # 1. Veritabanı Bağlantı Bilgileri (Aiven)
-GCP_HOST = os.getenv("GCP_HOST", "enerstra-enerstra.h.aivencloud.com")
-GCP_DB = os.getenv("GCP_DB", "enerstra3_db")
-GCP_USER = os.getenv("GCP_USER", "avnadmin")
+GCP_HOST = os.getenv("GCP_HOST")
+GCP_DB = os.getenv("GCP_DB")
+GCP_USER = os.getenv("GCP_USER")
 GCP_PASSWORD = os.getenv("GCP_PASSWORD")
-GCP_PORT = os.getenv("GCP_PORT", "16505")
+GCP_PORT = os.getenv("GCP_PORT")
 
 TABLE_NAME = "epias_ptf_smf_sdf"
 TARGET_DATETIME_COL = "datetime"
@@ -58,7 +58,7 @@ CAS_TGT_URL = "https://giris.epias.com.tr/cas/v1/tickets"
 # 2) YARDIMCI FONKSİYONLAR
 # ==============================
 def get_conn():
-    return psycopg2.connect(host=GCP_HOST, database=GCP_DB, user=GCP_USER, password=GCP_PASSWORD, port=GCP_PORT, connect_timeout=30)
+    return psycopg2.connect(host=GCP_HOST, database=GCP_DB, user=GCP_USER, password=GCP_PASSWORD, port=GCP_PORT, connect_timeout=30, sslmode='require')
 
 def sanitize_col(name: str) -> str:
     s = str(name).strip().translate(str.maketrans("ıçğöşüİÇĞÖŞÜ", "icgosuICGOSU"))
@@ -237,11 +237,11 @@ def delta_update(tgt: str):
     print(f"\n✓ PTF/SMF/SDF işlemi tamamlandı. Toplam yeni yazılan satır: {total_rows}")
 
 if __name__ == "__main__":
-    if "YAZ" in [EPIAS_EMAIL, EPIAS_PASSWORD, GCP_PASSWORD]: raise SystemExit("Lütfen kimlik bilgilerini eksiksiz girin.")
+    if "YAZ" in [SEFFAFLIK_USER, SEFFAFLIK_PASS, GCP_PASSWORD]: raise SystemExit("Lütfen kimlik bilgilerini eksiksiz girin.")
     
     with get_conn() as conn, conn.cursor() as cur:
         cur.execute("SELECT current_database(), NOW();")
         print(f"✓ GCP PostgreSQL bağlantısı başarılı: {cur.fetchone()}")
 
     print("TGT alınıyor ve delta akışı başlatılıyor...")
-    delta_update(get_tgt(EPIAS_EMAIL, EPIAS_PASSWORD))
+    delta_update(get_tgt(SEFFAFLIK_USER, SEFFAFLIK_PASS))

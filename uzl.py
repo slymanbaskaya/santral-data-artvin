@@ -15,18 +15,18 @@ from sqlalchemy import create_engine, text
 # =====================================================
 # KULLANICI BILGILERI
 # =====================================================
-EPIAS_USER = os.getenv("EPIAS_USER")  # ⚠️ PROD: ENV kullanın
-EPIAS_PASS = "Maslak127."  # ⚠️ PROD: ENV kullanın
+EPIAS_USER = os.getenv("EPIAS_USER")
+EPIAS_PASS = os.getenv("EPIAS_PASS")
 
 # =====================================================
 # VERITABANI AYARLARI (GCP)
 # =====================================================
 # 1. Veritabanı Bağlantı Bilgileri (Aiven)
-GCP_HOST = os.getenv("GCP_HOST", "enerstra-enerstra.h.aivencloud.com")
-GCP_DB = os.getenv("GCP_DB", "enerstra3_db")
-GCP_USER = os.getenv("GCP_USER", "avnadmin")
+GCP_HOST = os.getenv("GCP_HOST")
+GCP_DB = os.getenv("GCP_DB")
+GCP_USER = os.getenv("GCP_USER")
 GCP_PASSWORD = os.getenv("GCP_PASSWORD")
-GCP_PORT = os.getenv("GCP_PORT", "16505")
+GCP_PORT = os.getenv("GCP_PORT")
 
 TABLE_NAME = "santral_data_artvin_uzl"
 
